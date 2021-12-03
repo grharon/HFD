@@ -24,40 +24,37 @@ class Account:
     def __str__(self):
         return f"{self.name}'s account. Latest Balance: {self.balance}"
 
+
+class DevAccount(Account):
+    def __init__(self, id, name, balance):
+        self.id = id
+        self.name = name
+        self.balance = balance
+
+    def setBalance(self, amount):
+        self.balance = amount
+        return self.balance
+
+    def getBalance(self):
+        return self.balance
+
+    def transfer(self, amount, account):
+        self.balance = self.balance - amount
+        account.balance = account.balance + amount
+        return f"{self.name} with current balance {self.balance + amount}, transfer to {account.name} amount: {amount} "
+
+
 # Section 2 - Q1
-
-
-# Instance Customer 1
+# Customer 1
 c1 = Account("A0000", "Ali", 0)
 print("---Ali--")
 print(c1.deposit(100))
 print(c1)
 
-# Instance Customer 2
-c2 = Account("A0001", "Muthu", 1000)
-print("---Muthu--")
-print(c2.withdraw(1001))
+# Customer 2
+c2 = DevAccount("B0000", "Jim", 100)
+print("---Jim--")
 print(c2)
-
-# Instance Customer 3
-c3 = Account("A0002", "Chong", 2000)
-print("---Chong--")
-print(c3.deposit(100))
-print(c3)
-print(c3.withdraw(100))
-print(c3)
-
-# b) store them in a data structure chosen : namedtuple
-# Reason: Kinda like easy and immutable data structures, but not suitable for dynamic variable field such as balance
-
-Customer = namedtuple('Customer', ['id', 'name', 'balance'])
-
-Customers = [
-    Customer(c1.id, c1.name, c1.balance),
-    Customer(c2.id, c2.name, c2.balance),
-    Customer(c3.id, c3.name, c3.balance),
-]
-
-print(Customers[0])
-print(Customers[1])
-print(Customers[2])
+print(c2.transfer(50, c1))
+print(c2)
+print(c1)
