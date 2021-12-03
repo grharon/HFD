@@ -1,6 +1,3 @@
-from collections import namedtuple
-
-
 class Account:
     def __init__(self, id, name, balance):
         self.id = id
